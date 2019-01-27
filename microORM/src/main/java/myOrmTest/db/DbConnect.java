@@ -11,6 +11,18 @@ public class DbConnect implements AutoCloseable{
 
     private static Connection connection = null;
 
+
+
+
+
+
+
+
+
+
+
+
+
     /** Формирование строки подключения к базе данных или ее создания, если она отсутствует **/
     public static void initConnection(String driver,String username,
                                       String password, String host,
@@ -19,7 +31,11 @@ public class DbConnect implements AutoCloseable{
         connectionProp.put("user", username);
         connectionProp.put("password", password);
         connection = DriverManager.getConnection("jdbc:" + driver + "://" + host + ":"
-                + port + "/" + dbName + CREATE_IF_NO_EXIST + MYSQL_CONFIG,connectionProp);
+                + port + "/" + dbName + CREATE_IF_NO_EXIST + MYSQL_CONFIG+
+                "&requireSSL=false"+
+                "&useLegacyDatetimeCode=false"+
+                "&amp"+
+                "&serverTimezone=UTC",connectionProp);
     }
 
     public static Connection getConnection() {
