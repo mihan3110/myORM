@@ -30,12 +30,20 @@ public class DbConnect implements AutoCloseable{
         Properties connectionProp = new Properties();
         connectionProp.put("user", username);
         connectionProp.put("password", password);
-        connection = DriverManager.getConnection("jdbc:" + driver + "://" + host + ":"
-                + port + "/" + dbName + CREATE_IF_NO_EXIST + MYSQL_CONFIG+
-                "&requireSSL=false"+
-                "&useLegacyDatetimeCode=false"+
-                "&amp"+
-                "&serverTimezone=UTC",connectionProp);
+        switch (driver) {
+            case "mysql":
+                connection = DriverManager.getConnection("jdbc:" + driver + "://" + host + ":"
+                        + port + "/" + dbName + CREATE_IF_NO_EXIST + MYSQL_CONFIG +
+                        "&requireSSL=false" +
+                        "&useLegacyDatetimeCode=false" +
+                        "&amp" +
+                        "&serverTimezone=UTC", connectionProp);
+                break;
+            case "sqlserver":
+                connection = DriverManager.getConnection("jdbc:" + driver + "://" + host + ":"
+                        + port + ";databaseName=" + dbName, connectionProp);
+                break;
+        }
     }
 
     public static Connection getConnection() {

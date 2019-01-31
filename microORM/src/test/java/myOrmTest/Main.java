@@ -19,16 +19,17 @@ public class Main {
         try {
 
          //Подключаемся
+          //  DbConnect.initConnection("sqlserver", "root", "123456", "localhost", "1433", "myOrm");
             DbConnect.initConnection("mysql", "root", "123456", "localhost", "3306", "myOrm");
-
             connection = DbConnect.getConnection();
 
             em = new EntityManager(connection);
-
-            //Создаем сущность и заполняем ее
+            System.out.println(1);
+            //Создаем сущность и зsаполняем ее
             User user = new User("Ivan", "Ivanov", 27,new Date());
-
+            System.out.println(2);
             em.persist(user);
+
 
             //Поиск 1-го
             User newUser = em.findFirst(User.class);

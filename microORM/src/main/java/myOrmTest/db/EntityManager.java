@@ -1,5 +1,6 @@
 package myOrmTest.db;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import myOrmTest.annotations.Column;
 import myOrmTest.annotations.Entity;
 import myOrmTest.annotations.Id;
